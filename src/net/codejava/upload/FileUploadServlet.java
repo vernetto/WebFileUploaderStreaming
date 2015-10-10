@@ -64,23 +64,25 @@ public class FileUploadServlet extends HttpServlet {
 		    if (!uploadDir.exists()) {
 			uploadDir.mkdirs();
 		    }
-		    
+
 		    String fileName = item.getName();
 		    System.out.println("File field " + name + " with file name " + fileName + " detected.");
 		    File inputFile = new File(fileName);
-		    File outputFile = new File(uploadDir,  inputFile.getName());
+		    File outputFile = new File(uploadDir, inputFile.getName());
 		    OutputStream outputStream = new FileOutputStream(outputFile);
 		    boolean closeOutputStream = true;
 		    // Process the input stream
 		    Streams.copy(inputStream, outputStream, closeOutputStream);
-		    System.out.println("file successfully created " + outputFile.getAbsolutePath());
+		    String message = "file successfully created " + outputFile.getAbsolutePath();
+		    System.out.println(message);
+		    request.setAttribute("message", "Upload has been done successfully!");
 
 		}
 	    } // redirects client to message page
-	} catch (Exception e) {
-	    e.printStackTrace();
+	} catch (Exception ex) {
+	    ex.printStackTrace();
+	    request.setAttribute("message", "There was an error: " + ex.getMessage());
 	}
 	getServletContext().getRequestDispatcher("/message.jsp").forward(request, response);
     }
 }
-
