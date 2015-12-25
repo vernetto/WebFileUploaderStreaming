@@ -12,7 +12,9 @@
         <form method="post" action="uploadFile" enctype="multipart/form-data">
             Select file to upload: 
             <input type="file" name="uploadFile" /> 
-            <br/><br/> 
+            <br/><br/>
+            To encrypt, enter a password here <input type="password" name="encryptionPassword" />   
+            <br/><br/>
             <input type="submit" value="Upload" />
         </form>
     </center>

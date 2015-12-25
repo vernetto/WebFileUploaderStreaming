@@ -12,12 +12,20 @@
     <servlet-name>FileUploadServlet</servlet-name>
     <servlet-class>net.codejava.upload.FileUploadServlet</servlet-class>
   </servlet>
-   
+  <servlet>
+    <display-name>FileDownloadServlet</display-name>
+    <servlet-name>FileDownloadServlet</servlet-name>
+    <servlet-class>net.codejava.upload.FileDownloadServlet</servlet-class>
+  </servlet>   
+  
   <servlet-mapping>
     <servlet-name>FileUploadServlet</servlet-name>
     <url-pattern>/uploadFile</url-pattern>
   </servlet-mapping>
-     
+  <servlet-mapping>
+    <servlet-name>FileDownloadServlet</servlet-name>
+    <url-pattern>/downloadFile</url-pattern>
+  </servlet-mapping>     
   <welcome-file-list>
     <welcome-file>upload.jsp</welcome-file>
   </welcome-file-list>
