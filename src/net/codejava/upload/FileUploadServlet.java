@@ -95,9 +95,11 @@ public class FileUploadServlet extends HttpServlet {
 				try {
 					CreateZipWithOutputStreams.createZipWithOutputStreams(outputFile.getAbsolutePath(), password);
 					request.setAttribute("message", "Upload with encryption has been done successfully! File is " + outputFile.getName() + ".zip");
+					outputFile.delete();
 				}
-				catch (Exception e) {
-					e.printStackTrace();
+				catch (Exception ex) {
+					ex.printStackTrace();
+					request.setAttribute("message", "There was an error while encrypting: " + ex.getMessage());
 				}
 			}
 			else {
