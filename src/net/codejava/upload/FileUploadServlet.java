@@ -50,6 +50,10 @@ public class FileUploadServlet extends HttpServlet {
 		File inputFile = null;
 		File outputFile = null;
 		boolean hasErrors = false;
+		String url = request.getRequestURL().toString();
+		System.out.println("url=" + url); // http://localhost:7001/WebFileUploader/uploadFile
+		String downloadURL = url.replace("/WebFileUploader/uploadFile", "/WebFileUploader/downloadFile?filename=");
+
 
 		// Parse the request
 		try {
@@ -94,7 +98,7 @@ public class FileUploadServlet extends HttpServlet {
 				// encrypt file!
 				try {
 					CreateZipWithOutputStreams.createZipWithOutputStreams(outputFile.getAbsolutePath(), password);
-					request.setAttribute("message", "Upload with encryption has been done successfully! File is " + outputFile.getName() + ".zip");
+					request.setAttribute("message", "Upload with encryption has been done successfully! File is " + outputFile.getName() + ".zip, downloadURL= " + downloadURL +  outputFile.getName() + ".zip");
 					outputFile.delete();
 				}
 				catch (Exception ex) {
@@ -103,7 +107,7 @@ public class FileUploadServlet extends HttpServlet {
 				}
 			}
 			else {
-				request.setAttribute("message", "Upload has been done successfully! File is " + outputFile.getName());
+				request.setAttribute("message", "Upload has been done successfully! File is " + outputFile.getName() + " downloadURL= " + downloadURL +  outputFile.getName());
 			}
 		}
 
