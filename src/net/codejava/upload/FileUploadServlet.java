@@ -17,6 +17,7 @@ import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.fileupload.util.Streams;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 
 import static net.codejava.upload.FileUploadConfiguration.*;
@@ -75,8 +76,8 @@ public class FileUploadServlet extends HttpServlet {
 						uploadDir.mkdirs();
 					}
 
-					String fileName = item.getName();
-					System.out.println("File field " + name + " with file name " + fileName + " detected.");
+					String fileName = FilenameUtils.getName(item.getName());
+					System.out.println("File field " + name + " with file name " + fileName + " detected."); // full path, like D:\temp\moby-dick-3-sdw.jpg
 					inputFile = new File(fileName);
 					outputFile = new File(uploadDir, inputFile.getName());
 					OutputStream outputStream = new FileOutputStream(outputFile);
